@@ -1,0 +1,135 @@
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <cstdlib>
+
+using namespace std;
+
+class Pracownik
+{
+	string im, nazw, stan;
+	int zarob;
+
+public:
+	void set()
+	{
+
+	}
+
+	void get()
+	{
+
+	}
+
+	Pracownik()
+	{
+
+	}
+};
+
+class Firma
+{
+public:
+	string imie1[100], nazwisko1[100], stanowisko1[100];
+	int zarobki1[100];
+	int a = 0;
+
+	void Dodaj()
+	{
+		cout << "Wpisz imie: ";
+		cin >> imie1[a];
+		cout << "Wpisz nazwisko: ";
+		cin >> nazwisko1[a];
+		cout << "Wpisz stanowisko pracownika: ";
+		cin >> stanowisko1[a];
+		cout << "Wpisz zarobki na godzine: ";
+		cin >> zarobki1[a];
+		a = a + 1;
+	}
+
+	void Wypis()
+	{
+		if (a > 0)
+		{
+			for (int i = 0; i <= a-1; i++)
+			{
+				cout << i + 1 << "."
+					<< imie1[i] << endl
+					<< nazwisko1[i] << endl
+					<< stanowisko1[i] << endl
+					<< zarobki1[i] << endl
+					<< "====================" << endl;
+			}
+		}
+
+		if (a == 0)
+		{
+			cout << "Brak pracownikow!" << endl;
+		}
+	}
+
+	void pracownikWypis(int b)
+	{
+		cout << b << "."
+			<< imie1[b - 1] << endl
+			<< nazwisko1[b - 1] << endl
+			<< stanowisko1[b - 1] << endl
+			<< zarobki1[b - 1] << endl;
+	}
+	
+	void pracownikStawka(string nazwisko2)
+	{
+		for (int i = 0; i <= a; i++)
+		{
+			if (nazwisko1[i] == nazwisko2)
+			{
+				cout << zarobki1[i] << endl;
+			}
+		}
+	}
+};
+
+int main()
+{
+	Firma f1;
+
+	for (;;)
+	{
+		string opcja;
+		cout << "MENU" << endl
+			<< "==================" << endl
+			<< "Wypisz pracownikow = W" << endl
+			<< "Dodaj pracownika = D" << endl
+			<< "Wypisz pracownika o numerze = WN" << endl
+			<< "Wypisz stawke za godzine dla pracownika o nazwisku = WS" << endl
+			<< "Zakoncz = Z" << endl;
+		cin >> opcja;
+
+		if (opcja == "W" || opcja == "w")
+		{
+			f1.Wypis();
+		}
+		else if (opcja == "D" || opcja == "d")
+		{
+			f1.Dodaj();
+		}
+		else if (opcja == "WN" || opcja == "Wn" || opcja == "wN" || opcja == "wn")
+		{ 
+			int numer;
+			cout << "Wpisz numer pracownik: " << endl;
+			cin >> numer;
+			f1.pracownikWypis(numer);
+		}
+		else if (opcja == "WS" || opcja == "Ws" || opcja == "wS" || opcja == "ws")
+		{	
+			string nazwisko;
+			cout << "Wpisz nazwisko: " << endl;
+			cin >> nazwisko;
+			f1.pracownikStawka(nazwisko);
+		}
+		else if (opcja == "Z" || opcja == "z")
+		{
+			exit(0);
+		}
+	}
+}
